@@ -41,7 +41,6 @@ i18n.init = function (config) {
     }
     _translation[_config.current_lang] = {};
     _translation[_config.default_lang] = {};
-    console.log('i18n:init');
 }
 
 /**
@@ -110,7 +109,7 @@ i18n.getCurrentLang = function () {
  * @param {String} lang
  */
 i18n.add = function (filePath, lang) {
-    if (lang == undefined) {
+    if (lang == undefined || lang == null) {
         lang = _config.current_lang;
     }
     var content = {};
@@ -130,6 +129,9 @@ i18n.add = function (filePath, lang) {
  * @param {String} lang
  */
 i18n.addFile = function (filePath, lang) {
+    if(!_translation.hasOwnProperty(lang)){
+        _translation[lang] = {};
+    }
     try {
         try {
             var translate = JSON.parse(fs(filePath, 'utf8'));
