@@ -1,0 +1,17 @@
+{
+  "name": "z-i18n",
+  "version": "1.0.0",
+  "description": "Translation module with dynamic json storage and suport npm: express, z-form...",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "i18n",
+    "l10n",
+    "localization",
+    "multilanguage"
+  ],
+  "author": "ZaiChi",
+  "license": "MIT"
+}
