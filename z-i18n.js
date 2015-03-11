@@ -85,7 +85,7 @@ i18n.getTranslation = function () {
 }
 
 /**
- * Set language
+ * Set current language
  *
  * @param {String} lang
  */
@@ -94,12 +94,30 @@ i18n.setCurrentLang = function (lang) {
 }
 
 /**
- * Get language
+ * Get current language
  *
  * @returns {string|*}
  */
 i18n.getCurrentLang = function () {
     return _config.current_lang;
+}
+
+/**
+ * Set default language
+ *
+ * @param {String} lang
+ */
+i18n.setDefaultLang = function (lang) {
+    _config.default_lang = lang;
+}
+
+/**
+ * Get default language
+ *
+ * @returns {string|*}
+ */
+i18n.getDefaultLang = function () {
+    return _config.default_lang;
 }
 
 /**
@@ -172,10 +190,10 @@ i18n.__ = function (str) {
     }
 
     var translate = str;
-    if (_translation[_config.current_lang][str]) {
+    if (_translation.hasOwnProperty(_config.current_lang) && _translation[_config.current_lang][str]) {
         translate = _translation[_config.current_lang][str];
     }else{
-        if (_translation[_config.default_lang][str]) {
+        if (_translation.hasOwnProperty(_config.default_lang) && _translation[_config.default_lang][str]) {
             translate = _translation[_config.default_lang][str];
         }
     }

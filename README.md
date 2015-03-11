@@ -1,6 +1,7 @@
 # Multi language z-i18n
 
 * Download and install test project at (New version 1.0.2): https://github.com/kimthangatm/test-node-js-z-i18n/
+* New tutorial at: https://kimtatthang.wordpress.com/2015/03/11/multiple-languages-i18n-l10n-in-your-node-js-express-and-redis/
 * Translation module with dynamic json storage and suport npm: express, z-form...
 * When APP Node JS firt run, translation loaded loaded from file or Redis and never reload => Fast
 
@@ -24,7 +25,7 @@ sudo npm install z-i18n
 project_name/
 └── languages
     ├── en_GB
-    │   └── moduleA.en_GB.json
+    │   └── moduleA.en_GB.json
     └── nl_NL
         └── moduleA.nl_NL.json
 ```
@@ -142,4 +143,3 @@ Welcome to Express
 
 Result => Hallo, ZaiChi 25 jaar oud
 ```
-
