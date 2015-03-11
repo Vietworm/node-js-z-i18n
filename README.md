@@ -1,5 +1,6 @@
 # Multi language z-i18n
 
+* Download and install test project at (New version 1.0.2): https://github.com/kimthangatm/test-node-js-z-i18n/
 * Translation module with dynamic json storage and suport npm: express, z-form...
 * When APP Node JS firt run, translation loaded loaded from file or Redis and never reload => Fast
 
