@@ -47,22 +47,8 @@ i18n.init = function (config) {
  * Set translation
  * Use this function if you want use Redis store translation
  *
- * <code>
- *      var redis = require('redis').createClient();
- *      var i18n = require('z-i18n');
- *      i18n.init({current_lang : 'en_GB'});
- *      redis.get(langRedisCache, function(error, result){
- *          if(result != null){
- *              i18n.setTranslation(result);
- *              global.i18n = i18n;
- *          }else{
- *              i18n.add('languages/en-GB/moduleA.en-GB.json', 'en_GB');
- *              i18n.add('languages/vi-VN/moduleA.vi-VN.json', 'vi_VN');
- *              global.i18n = i18n;
- *              redis.set(langRedisCache, JSON.stringify(i18n.getTranslation()), redis.print)
- *          }
- *       });
- * </code>
+ * @url Tutorial https://kimtatthang.wordpress.com/2015/03/11/multiple-languages-i18n-l10n-in-your-node-js-express-and-redis/
+ * @url Example  https://github.com/kimthangatm/test-node-js-z-i18n
  *
  * @param {Object} translation
  */
@@ -182,10 +168,10 @@ i18n.__ = function (str) {
         arguments[arguments.length - 1] !== null &&
         typeof arguments[arguments.length - 1] === "object"
     ) {
-        namedValues = arguments[arguments.length - 1];
+        //namedValues = arguments[arguments.length - 1];
         args = Array.prototype.slice.call(arguments, 1, -1);
     } else {
-        namedValues = {};
+        //namedValues = {};
         args = arguments.length >= 2 ? Array.prototype.slice.call(arguments, 1) : [];
     }
 

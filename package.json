@@ -1,6 +1,6 @@
 {
   "name": "z-i18n",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Translation module with dynamic json storage in Redis and suport npm: express, z-form...",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,7 @@
     "i18n",
     "l10n",
     "localization",
+    "multiple",
     "multilanguage"
   ],
   "author": {
@@ -43,13 +44,5 @@
       "name": "kimthangatm",
       "email": "kimthangatm@gmail.com"
     }
-  ],
-  "dist": {
-    "shasum": "aa62ef1a7f982e3ff210927d645a163b11d34b73",
-    "tarball": "http://registry.npmjs.org/z-i18n/-/z-i18n-1.0.0.tgz"
-  },
-  "directories": {},
-  "_resolved": "https://registry.npmjs.org/z-i18n/-/z-i18n-1.0.0.tgz",
-  "readme": "# Multi language z-i18n\n\n* Translation module with dynamic json storage and suport npm: express, z-form...\n* When APP Node JS firt run, translation loaded loaded from file or Redis and never reload => Fast\n\n# Install z-i18n\n\n```\nsudo npm install z-i18n\n```\n\n# Default language\n\n* Current language: `current_lang : en_GB`\n* Default language: `default_lang : en_GB`\n\n# Express with Redis\n\n### Languages folder/content sample\n\n* Folder construct\n```\nproject_name/\n└── languages\n    ├── en_GB\n    │   └── moduleA.en_GB.json\n    └── nl_NL\n        └── moduleA.nl_NL.json\n```\n\n* Content `languages/en_GB/moduleA.en_GB.json`\n```\n{\n  \"m_user_name_label\" : \"User name\",\n  \"m_user_name\" : \"Enter your user name!\",\n  \"hello_user_name\" : \"Hello, %s %s year old\"\n}\n```\n\n* Content `languages/nl_NL/moduleA.nl_NL.json`\n```\n{\n  \"m_user_name_label\" : \"Gebruikersnaam\",\n  \"m_user_name\" : \"Voer uw gebruikersnaam!\",\n  \"hello_user_name\" : \"Hallo, %s %s jaar oud\"\n}\n```\n\n### Code: project_folder/app.js\n\n```\nvar app = express();\n\n// Install Redis: sudo npm install redis\n// Require redis\nvar redis = require('redis').createClient();\n\n// Require z-i18n\nvar i18n = require('z-i18n');\n\n// Set current\ni18n.init({current_lang : 'en_GB'}); //default_lang = en_GB\n\n// Or set current_lang/default_lang\n// i18n.init({current_lang : 'en_GB', default_lang : 'en_GB'});\n\n// Translations into the dutch language.\n// i18n.init({current_lang : 'nl_NL', default_lang : 'en_GB'});\n\nvar languageRedisCache = 'LANGUAGE_CACHE_REDIS';\n\nredis.get(languageRedisCache, function(error, result){\n    if(result == null){\n        i18n.add('languages/nl_NL/moduleA.nl_NL.json', 'nl_NL');\n        console.log(i18n.getTranslation());\n        i18n.add('languages/en_GB/moduleA.en_GB.json', 'en_GB');\n        console.log(i18n.getTranslation());\n        global._t = i18n.__;\n        //global._ = i18n.__;\n\n        redis.set(languageRedisCache, JSON.stringify(i18n.getTranslation()), redis.print);\n    }else{\n        i18n.setTranslation(result);\n        global._t = i18n.__;\n        //global._ = i18n.__;\n    }\n});\n\n//Use middleware to set current language\n//Eg: Now I use basic not use middleware\nvar userA = {\n    name :' ZaiChi',\n    language : 'nl_NL'\n};\n//=>\ni18n.setCurrentLang(userA.language);\n```\n\n### Code Router: project_folder/routes/index.js\n\n```\nvar express = require('express');\nvar router = express.Router();\n\n/* GET home page. */\nrouter.get('/', function (req, res, next) {\n    var hello = _t('hello_user_name', 'ZaiChi', 25);\n    //var hello = _('hello_user_name', 'ZaiChi', 25);\n    res.render('index', {title: 'Express', hello : hello});\n});\n\nmodule.exports = router;\n```\n\n### Code View: project_folder/views/index.jade\n```\nextends layout\nblock content\n    h1= title\n    p Welcome to #{title}\n\n    p \"hello_user_name = Hallo, %s %s jaar oud\"\n    p \"var hello = _t('hello_user_name', 'ZaiChi', 26);\"\n    p \"============================\"\n    p Result => #{hello}\n  \n```\n\n### Result\n\n```\nExpress\n\nWelcome to Express\n\n\"hello_user_name = Hallo, %s %s jaar oud\"\n\n\"var hello = _t('hello_user_name', 'ZaiChi', 25);\"\n\n\"============================\"\n\nResult => Hallo, ZaiChi 25 jaar oud\n```\n\n",
-  "readmeFilename": "README.md"
+  ]
 }
