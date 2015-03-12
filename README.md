@@ -22,8 +22,8 @@ $ make
 $ sudo make install
 // Restart redis in background Mac OS
 $ redis-server > /dev/null &
-Note: When Node Js application running, translation save on Redis, if you want reload cache please follow:
-```
+``` 
+**Note:** `When Node Js application running, translation save on Redis, if you want reload cache please follow:`
 
 *Typing into terminal*
 

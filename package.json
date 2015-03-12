@@ -1,6 +1,6 @@
 {
   "name": "z-i18n",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Translation module with dynamic json storage in Redis and suport npm: express, z-form...",
   "main": "index.js",
   "scripts": {
